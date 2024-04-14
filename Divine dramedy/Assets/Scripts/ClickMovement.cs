@@ -13,15 +13,19 @@ public class ClickMovement : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButton(1)) 
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
-            {
-                agent.SetDestination(hit.point);
-            }
+            MoveTo(Input.mousePosition);
+        }
+    }
+
+    public void MoveTo(Vector3 position) 
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            agent.SetDestination(hit.point);
         }
     }
 }

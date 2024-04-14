@@ -6,28 +6,57 @@ using UnityEngine.AI;
 
 public class InteractObject : MonoBehaviour
 {
-    NavMeshAgent agent;
+    GameObject protagonist;
+
+    [SerializeField] Canvas m_canvas;
+    public RectTransform m_parent;
+    public Camera m_uiCamera;
+    public RectTransform m_group;
     void Start()
     {
-        GameObject protagonist = GameObject.Find("Protagonist");
-        agent = protagonist.GetComponent<NavMeshAgent>();
+        protagonist = GameObject.Find("Protagonist");
     }
 
-    
     void Update()
     {
         
     }
 
-    public void OnMouseDown()
+    void OnMouseDown()
     {
-        Debug.Log("Clicked");
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            agent.SetDestination(hit.point);
-        }
+        Vector3 mousePos = Input.mousePosition;
+        ApproachTheObject(mousePos);
+        OpenMenu(mousePos);
     }
+    void OpenMenu(Vector3 mousePos) 
+    {
+        
+
+        if (m_canvas.gameObject.activeSelf)
+        {
+            m_canvas.gameObject.SetActive(false);
+        }
+        else
+        {
+            m_canvas.gameObject.SetActive(true);
+            
+            Vector2 anchoredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(m_parent, mousePos, m_canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : m_uiCamera, out anchoredPos);
+            m_group.anchoredPosition = anchoredPos;
+            
+        }
+
+        
+    }
+
+    void ApproachTheObject(Vector3 mousePos) 
+    {
+        protagonist.GetComponent<ClickMovement>().MoveTo(mousePos);
+    }
+
+
+
+
+
 
 }
