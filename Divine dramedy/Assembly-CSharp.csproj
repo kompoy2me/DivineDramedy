@@ -59,7 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ClickMovement.cs" />
+    <Compile Include="Assets\Scripts\ButtonLook.cs" />
     <Compile Include="Assets\Scripts\InteractObject.cs" />
+    <Compile Include="Assets\Scripts\ShowInteractWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -25,7 +25,7 @@ public class InteractObject : MonoBehaviour
     void OnMouseDown()
     {
         Vector3 mousePos = Input.mousePosition;
-        ApproachTheObject(mousePos);
+        //ApproachTheObject(mousePos);
         OpenMenu(mousePos);
     }
     void OpenMenu(Vector3 mousePos) 
